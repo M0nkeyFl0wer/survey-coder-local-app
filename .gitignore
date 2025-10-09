@@ -1,0 +1,159 @@
+# Survey Coder - Secure .gitignore
+# Protects API keys, database files, and sensitive data
+
+# API Keys and Secrets
+*.key
+*.secret
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+config/secrets.json
+config/api_keys.json
+
+# OpenAI API Keys
+openai_api_key.txt
+openai.key
+.openai_key
+OPENAI_API_KEY
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+.coder_app/
+~/.coder_app/
+projects.db*
+classifications.db*
+
+# Survey Data (often contains sensitive user responses)
+*.csv
+*.xlsx
+*.xls
+!sample_data/
+!examples/
+!test_data/
+survey_data/
+responses/
+raw_data/
+
+# Classification Results (may contain sensitive content)
+results/
+classifications/
+exports/
+output/
+*_classified.csv
+*_results.json
+*_export.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pipenv/
+
+# IDE and Editor Files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/.ropeproject
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing and Coverage
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+
+# Jupyter Notebooks (may contain API keys or sensitive data)
+.ipynb_checkpoints
+*.ipynb
+
+# Temporary Files
+*.tmp
+*.temp
+temp/
+tmp/
+.cache/
+*.log
+logs/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# SSH Keys
+*.pem
+*.ppk
+id_rsa*
+id_ed25519*
+known_hosts
+
+# Docker secrets
+docker-compose.override.yml
+.dockerignore
+
+# Local development files
+local_config.json
+dev_settings.py
+test_config.py
+
+# Backup files
+*.bak
+*.backup
+*_backup.*
+
+# Large files that shouldn't be in git
+*.zip
+*.tar.gz
+*.rar
+*.7z
+models/
+checkpoints/
+
+# IDE workspace files
+*.code-workspace
+.vscode/settings.json

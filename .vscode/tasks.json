@@ -1,0 +1,215 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Survey Coder: Install Dependencies",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["install"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Survey Coder: Check Status",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "python", "-m", "coder_app", "status"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: List Projects",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "python", "-m", "coder_app", "project", "list"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: Run Tests",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "python", "test_new_architecture.py"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Survey Coder: Format Code",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "black", "coder_app/", "test_new_architecture.py"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: Lint Code",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "flake8", "coder_app/"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                {
+                    "owner": "python",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(.*):(\\d+):(\\d+):\\s+(.*)",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "message": 4
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Survey Coder: Create New Project",
+            "type": "shell",
+            "command": "pipenv",
+            "args": [
+                "run", "python", "-m", "coder_app", "project", "init",
+                "--name", "${input:projectName}",
+                "--description", "${input:projectDescription}",
+                "--question", "${input:surveyQuestion}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: Show Project Details",
+            "type": "shell",
+            "command": "pipenv",
+            "args": [
+                "run", "python", "-m", "coder_app", "project", "show",
+                "--name", "${input:existingProjectName}"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: Export Project Data",
+            "type": "shell",
+            "command": "pipenv",
+            "args": [
+                "run", "python", "-m", "coder_app", "export", "project-data",
+                "--project", "${input:existingProjectName}",
+                "--output", "${input:exportFilename}",
+                "--format", "${input:exportFormat}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Survey Coder: Run Original Streamlit App",
+            "type": "shell",
+            "command": "pipenv",
+            "args": ["run", "streamlit", "run", "app.py"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "projectName",
+            "description": "Enter project name",
+            "default": "my-project",
+            "type": "promptString"
+        },
+        {
+            "id": "projectDescription",
+            "description": "Enter project description",
+            "default": "Survey coding project",
+            "type": "promptString"
+        },
+        {
+            "id": "surveyQuestion",
+            "description": "Enter the survey question",
+            "default": "What is your feedback?",
+            "type": "promptString"
+        },
+        {
+            "id": "existingProjectName",
+            "description": "Select existing project",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "pipenv run python -m coder_app project list --format=names",
+                "fieldSeparator": "\\n",
+                "description": "Select project"
+            }
+        },
+        {
+            "id": "exportFilename",
+            "description": "Export filename",
+            "default": "export.json",
+            "type": "promptString"
+        },
+        {
+            "id": "exportFormat",
+            "description": "Export format",
+            "type": "pickString",
+            "options": [
+                "json",
+                "csv"
+            ],
+            "default": "json"
+        }
+    ]
+}
