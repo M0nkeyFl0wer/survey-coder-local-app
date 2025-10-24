@@ -1,4 +1,4 @@
-# Survey Coder - Modernized Architecture
+# Survey Coder - Local Architecture 
 
 > 🚀 **AI-powered survey data analysis with persistent local storage and multi-agent capabilities**
 
